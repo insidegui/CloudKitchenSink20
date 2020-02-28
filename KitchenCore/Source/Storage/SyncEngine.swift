@@ -227,7 +227,7 @@ final class SyncEngine {
             if let error = error {
                 os_log("Failed to check for private zone subscription existence: %{public}@", log: self.log, type: .error, String(describing: error))
 
-                if !error.retryCloudKitOperationIfPossible(self.log, with: { self.checkCustomZone() }) {
+                if !error.retryCloudKitOperationIfPossible(self.log, with: { self.checkSubscription() }) {
                     os_log("Irrecoverable error when fetching private zone subscription, assuming it doesn't exist: %{public}@", log: self.log, type: .error, String(describing: error))
 
                     DispatchQueue.main.async {
