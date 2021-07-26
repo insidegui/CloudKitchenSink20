@@ -114,17 +114,17 @@ extension CKAsset {
 
 extension Recipe {
     static func resolveConflict(clientRecord: CKRecord, serverRecord: CKRecord) -> CKRecord? {
-        // Most recent record wins. This might not be the best solution but YOLO.
+        // Custom logic for resolving conflicts.
+        // In this example, the client values will always overwrite all server values.
+        //
+        // The server record has the latest changeTag and must be returned.
 
-        guard let clientDate = clientRecord.modificationDate, let serverDate = serverRecord.modificationDate else {
-            return clientRecord
+        // Merge all client record keys/values into the server record
+        for key in clientRecord.allKeys() {
+            serverRecord[key] = clientRecord[key]
         }
 
-        if clientDate > serverDate {
-            return clientRecord
-        } else {
-            return serverRecord
-        }
+        return serverRecord
     }
 }
 

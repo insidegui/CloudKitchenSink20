@@ -328,7 +328,7 @@ final class SyncEngine {
             }
         }
 
-        operation.savePolicy = .changedKeys
+        operation.savePolicy = .ifServerRecordUnchanged
         operation.qualityOfService = .userInitiated
         operation.database = privateDatabase
 
